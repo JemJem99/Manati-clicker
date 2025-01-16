@@ -52,6 +52,16 @@ embedded_instances {
   ""
   position {
     x: 116.0
-    y: 8.0
+    y: 474.0
   }
+}
+embedded_instances {
+  id: "FactoryGameObject"
+  data: "embedded_components {\n"
+  "  id: \"factory\"\n"
+  "  type: \"factory\"\n"
+  "  data: \"prototype: \\\"/main/Acuario.go\\\"\\n"
+  "\"\n"
+  "}\n"
+  ""
 }
