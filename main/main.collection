@@ -16,12 +16,12 @@ embedded_instances {
   "  texture: \\\"/main/imatge.atlas\\\"\\n"
   "}\\n"
   "\"\n"
-  "  position {\n"
-  "    x: 486.0\n"
-  "    y: 249.0\n"
-  "  }\n"
   "}\n"
   ""
+  position {
+    x: 481.0
+    y: 285.0
+  }
 }
 embedded_instances {
   id: "score"

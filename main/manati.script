@@ -2,6 +2,11 @@ function init(self)
 	-- Inicializar variables
 	msg.post(".", "acquire_input_focus")
 	self.score = 0
+	self.scaling = false 
+	self.original_scale = vmath.vector3(1, 1, 1) 
+	self.target_scale = vmath.vector3(1.1, 1.1, 1) 
+	self.scale_duration = 0.2 
+	self.timer = 0
 	self.factory_url = msg.url("/FactoryGameObject#factory") -- URL del componente factory
 end
 
@@ -15,6 +20,13 @@ function update(self, dt)
 	-- Add update code here
 	-- Learn more: https://defold.com/manuals/script/
 	-- Remove this function if not needed
+	if self.scaling then
+		self.timer = self.timer - dt
+		if self.timer <= 0 then
+			self.scaling = false
+			go.set_scale(self.original_scale)
+		end
+	end
 end
 
 function fixed_update(self, dt)
@@ -40,6 +52,9 @@ function on_input(self, action_id, action)
 			-- Actualizar puntos en pantalla
 			local params = { points = self.score }
 			msg.post("/score#text", "points_updated", params)
+			go.set_scale(self.target_scale) -- Cambia la escala del nodo
+			self.scaling = true -- Activa el estado de escalado
+			self.timer = self.scale_duration
 
 			-- Crear un GameObject cada 10 clics
 			if self.score % 10 == 0 then
