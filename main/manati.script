@@ -8,6 +8,8 @@ function init(self)
 	self.scale_duration = 0.2 
 	self.timer = 0
 	self.factory_url = msg.url("/FactoryGameObject#factory") -- URL del componente factory
+	self.spawn_x = 50 -- Posición inicial en X para el primer objeto
+	self.spawn_step = 100 -- Distancia entre cada objeto en X
 end
 
 function final(self)
@@ -58,8 +60,9 @@ function on_input(self, action_id, action)
 
 			-- Crear un GameObject cada 10 clics
 			if self.score % 10 == 0 then
-				local position = vmath.vector3(0, 0, 0)
+				local position = vmath.vector3(self.spawn_x, 50, 0)
 				factory.create(self.factory_url, position)
+				self.spawn_x = self.spawn_x + self.spawn_step
 			end
 		end
 	end
