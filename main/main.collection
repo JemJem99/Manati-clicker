@@ -65,3 +65,13 @@ embedded_instances {
   "}\n"
   ""
 }
+embedded_instances {
+  id: "PlusOneFcatoryGameObject"
+  data: "embedded_components {\n"
+  "  id: \"PlusOneFactory\"\n"
+  "  type: \"factory\"\n"
+  "  data: \"prototype: \\\"/main/ScoreUp.go\\\"\\n"
+  "\"\n"
+  "}\n"
+  ""
+}
