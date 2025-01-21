@@ -62,18 +62,26 @@ function on_input(self, action_id, action)
 				self.spawn_x = self.spawn_x + self.spawn_step
 			end
 
-			-- Crear efecto "+1"
-			local click_position = vmath.vector3(0, 0, 0) -- Posición inicial del "+1" (ajústalo si es necesario)
-			local plus_one_id = factory.create(self.plus_one_factory_url, click_position)
+			-- Generar una posición aleatoria cercana a la posición base
+			local base_position = vmath.vector3(500, 270, 0) -- Posición base
+			local random_offset_x = math.random(-200, 200)    -- Rango aleatorio en X (-20 a 20)
+			local random_offset_y = math.random(-100, 300)    -- Rango aleatorio en Y (-10 a 30)
+			local random_position = vmath.vector3(base_position.x + random_offset_x, base_position.y + random_offset_y, base_position.z)
+
+			-- Crear el efecto "+1" en la posición aleatoria
+			local plus_one_id = factory.create(self.plus_one_factory_url, random_position)
 
 			-- Desplazar y desvanecer el "+1"
-			go.animate(plus_one_id, "position.y", go.PLAYBACK_ONCE_FORWARD, click_position.y + 50, go.EASING_OUTSINE, 1)
-			go.animate(plus_one_id, "color.w", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_INOUTQUAD, 1, 0, function()
-				go.delete(plus_one_id) -- Eliminar el efecto después de la animación
+			go.animate(plus_one_id, "position.y", go.PLAYBACK_ONCE_FORWARD, random_position.y + 50, go.EASING_OUTSINE, 1)
+
+			-- Eliminar el objeto "+1" después de 1 segundo
+			timer.delay(1, false, function()
+				go.delete(plus_one_id)
 			end)
 		end
 	end
 end
+
 
 function on_reload(self)
 	-- Manejar recarga si es necesario
