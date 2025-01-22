@@ -17,6 +17,25 @@ embedded_instances {
   "}\\n"
   "\"\n"
   "}\n"
+  "embedded_components {\n"
+  "  id: \"click_sound\"\n"
+  "  type: \"sound\"\n"
+  "  data: \"sound: \\\"/main/click_sound.wav\\\"\\n"
+  "\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"wow_sound\"\n"
+  "  type: \"sound\"\n"
+  "  data: \"sound: \\\"/main/wow_sound.wav\\\"\\n"
+  "\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"music_sound\"\n"
+  "  type: \"sound\"\n"
+  "  data: \"sound: \\\"/main/wow_sound.wav\\\"\\n"
+  "looping: 1\\n"
+  "\"\n"
+  "}\n"
   ""
   position {
     x: 481.0
@@ -74,4 +93,28 @@ embedded_instances {
   "\"\n"
   "}\n"
   ""
+}
+embedded_instances {
+  id: "background"
+  data: "embedded_components {\n"
+  "  id: \"sprite\"\n"
+  "  type: \"sprite\"\n"
+  "  data: \"default_animation: \\\"background\\\"\\n"
+  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
+  "textures {\\n"
+  "  sampler: \\\"texture_sampler\\\"\\n"
+  "  texture: \\\"/main/imatge.atlas\\\"\\n"
+  "}\\n"
+  "\"\n"
+  "}\n"
+  ""
+  position {
+    x: 496.0
+    y: 366.0
+  }
+  scale3 {
+    x: 1.58
+    y: 1.58
+    z: 1.58
+  }
 }

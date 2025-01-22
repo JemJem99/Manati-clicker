@@ -15,6 +15,11 @@ function init(self)
 	-- Posición para generar objetos
 	self.spawn_x = 50 -- Posición inicial en X para el primer objeto
 	self.spawn_step = 100 -- Distancia entre cada objeto en X
+
+	self.sound_url = msg.url("#click_sound")
+	self.wow_sound_url = msg.url("#wow_sound")
+	--self.wow_sound_url = msg.url("#music_sound")
+	--sound.play(self.music_sound_url, { loop = true })
 end
 
 function final(self)
@@ -50,6 +55,8 @@ function on_input(self, action_id, action)
 			local params = { points = self.score }
 			msg.post("/score#text", "points_updated", params)
 
+			sound.play(self.sound_url)
+			
 			-- Animar el escalado del objeto principal
 			go.set_scale(self.target_scale) -- Cambia la escala del nodo
 			self.scaling = true -- Activa el estado de escalado
@@ -60,6 +67,7 @@ function on_input(self, action_id, action)
 				local position = vmath.vector3(self.spawn_x, 50, 0)
 				factory.create(self.factory_url, position)
 				self.spawn_x = self.spawn_x + self.spawn_step
+				sound.play(self.wow_sound_url)
 			end
 
 			-- Generar una posición aleatoria cercana a la posición base
