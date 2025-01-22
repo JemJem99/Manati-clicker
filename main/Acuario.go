@@ -1,3 +1,7 @@
+components {
+  id: "Acuario"
+  component: "/main/Acuario.script"
+}
 embedded_components {
   id: "sprite"
   type: "sprite"

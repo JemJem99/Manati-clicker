@@ -33,6 +33,13 @@ function on_message(self, message_id, message, sender)
 
 	if (message_id == hash("points_updated")) then
 		UpdateText(self, message.points)
+	elseif message_id == hash("increment_points") then
+		-- Incrementar el puntaje
+		self.score = self.score + message.points
+
+		-- Actualizar el texto en pantalla
+		local params = { points = self.score }
+		msg.post("/score#text", "points_updated", params)
 	end
 end
 
