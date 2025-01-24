@@ -2,7 +2,12 @@ function init(self)
 	-- Add initialization code here
 	-- Learn more: https://defold.com/manuals/script/
 	-- Remove this function if not needed
-	UpdateText(self,0)
+	msg.post(".", "acquire_input_focus")
+	self.score = 0 -- Inicializar el puntaje
+	self.progress = 0 -- Inicializar el progreso
+
+	-- Actualizar los textos iniciales
+	UpdateText(self, self.score, self.progress)
 end
 
 function final(self)
@@ -15,6 +20,7 @@ function update(self, dt)
 	-- Add update code here
 	-- Learn more: https://defold.com/manuals/script/
 	-- Remove this function if not needed
+	
 end
 
 function fixed_update(self, dt)
@@ -30,17 +36,40 @@ function on_message(self, message_id, message, sender)
 	-- Add message-handling code here
 	-- Learn more: https://defold.com/manuals/message-passing/
 	-- Remove this function if not needed
-
+	
+	--point logic
 	if (message_id == hash("points_updated")) then
 		UpdateText(self, message.points)
 	elseif message_id == hash("increment_points") then
 		-- Incrementar el puntaje
 		self.score = self.score + message.points
-
 		-- Actualizar el texto en pantalla
 		local params = { points = self.score }
 		msg.post("/score#text", "points_updated", params)
 	end
+
+	-- progress logic
+	if (message_id == hash("progress_updated")) then
+		UpdateText(self, message.progress)
+	elseif message_id == hash("increment_progress") then
+		-- Incrementar el progreso
+		self.progress = self.progress + message.progress
+		-- Actualizar el texto en pantalla
+		local params = { progress = self.progress }
+		msg.post("/score#text", "progress_updated", params)
+	end
+
+	-- progress logic
+	if (message_id == hash("progress_updated")) then
+		UpdateText(self, message.progress)
+	elseif message_id == hash("increment_progress") then
+		-- Incrementar el progreso
+		self.progress = self.progress + message.progress
+		-- Actualizar el texto en pantalla
+		local params = { progress = self.progress }
+		msg.post("/score#text", "progress_updated", params)
+	end
+	
 end
 
 function on_input(self, action_id, action)
@@ -61,6 +90,7 @@ function on_reload(self)
 	-- Remove this function if not needed
 end
 
-function UpdateText(self, score)
+function UpdateText(self, score, progress)
 	label.set_text("#label", score)
+	label.set_text("#label1", progress)
 end
