@@ -59,16 +59,6 @@ function on_message(self, message_id, message, sender)
 		msg.post("/score#text", "progress_updated", params)
 	end
 
-	-- progress logic
-	if (message_id == hash("progress_updated")) then
-		UpdateText(self, message.progress)
-	elseif message_id == hash("increment_progress") then
-		-- Incrementar el progreso
-		self.progress = self.progress + message.progress
-		-- Actualizar el texto en pantalla
-		local params = { progress = self.progress }
-		msg.post("/score#text", "progress_updated", params)
-	end
 	
 end
 
