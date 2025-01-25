@@ -17,13 +17,6 @@ function init(self)
 
 	self.sound_url = msg.url("#click_sound")
 	self.wow_sound_url = msg.url("#wow_sound")
-
-	-- Instanciar la colección `progressAcuario` mediante el factory
-	self.progress_acuario_url = collectionfactory.create("main:/progress_factory")
-
-	-- Imprimir la URL para depuración
-	print("Progress Acuario URL:", self.progress_acuario_url)
-	print(collectionfactory.list())  -- Muestra todos los factories disponibles
 	
 end
 
@@ -48,7 +41,12 @@ function fixed_update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
-	-- Procesar mensajes recibidos si es necesario
+	if message_id == hash("increment_points") then
+		self.score = self.score + message.points
+		print("Puntaje actualizado:", self.score)
+		-- Opcional: Actualizar visualmente el puntaje
+		msg.post("/score#text", "points_updated", { points = self.score })
+	end
 end
 
 function on_input(self, action_id, action)
@@ -60,8 +58,11 @@ function on_input(self, action_id, action)
 
 			--actualizar gui progress
 			if self.progress_acuario_url then
-				msg.post(self.progress_acuario_url .. "#nodePie", "increment_clicks")
+				msg.post(self.progress_acuario_url .. "#progress_gui", "increment_clicks")
+				
 			end
+			print("Progress Acuario URL:", self.progress_acuario_url)
+			
 			
 			-- Actualizar puntos en pantalla
 			local params = { points = self.score }

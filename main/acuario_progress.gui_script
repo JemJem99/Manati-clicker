@@ -1,36 +1,37 @@
 function init(self)
 	-- Inicializar variables
 	self.clicks = 0             -- Número de clics actuales
-	self.clicks_to_spawn = 10   -- Clics necesarios para generar un nuevo objeto
+	self.clicks_to_complete = 10 -- Número de clics necesarios para llenar el pie
 	self.pie_node = gui.get_node("pie") -- Nodo del pie en la GUI
 end
 
+-- Función para actualizar el progreso del pie
 function update_progress(self)
-	-- Calcular porcentaje de progreso
-	local progress = self.clicks / self.clicks_to_spawn
+	-- Calcular el porcentaje de progreso
+	local progress = self.clicks / self.clicks_to_complete
 	if progress > 1 then
 		progress = 1 -- Limitar el progreso al 100%
 	end
 
-	-- Ajustar el tamaño del nodo pie basado en el progreso
-	local size = gui.get_size(self.pie_node)
-	size.x = 100 * progress -- Ajustar el ancho según el porcentaje (100 es el tamaño base)
-	gui.set_size(self.pie_node, size)
+	-- Ajustar el tamaño del nodo pie (relleno)
+	gui.set_fill_angle(self.pie_node, progress * math.pi * 2) -- Pie se llena en base al ángulo
 
-	-- Opcional: Cambiar color según el progreso
+	-- Opcional: Cambiar color del pie según el progreso
 	local color = vmath.vector4(1 - progress, progress, 0, 1) -- De rojo a verde
 	gui.set_color(self.pie_node, color)
 end
 
-function increment_clicks(self)
-	-- Incrementar el contador de clics
-	self.clicks = self.clicks + 1
+-- Incrementar los clics y actualizar el pie
+function on_message(self, message_id, message, sender)
+	if message_id == hash("increment_clicks") then
+		-- Incrementar clics y actualizar progreso
+		self.clicks = self.clicks + 1
+		update_progress(self)
 
-	-- Actualizar el nodo pie
-	update_progress(self)
-
-	-- Reiniciar clics si se alcanza el objetivo
-	if self.clicks >= self.clicks_to_spawn then
-		self.clicks = 0 -- Reiniciar el contador
+		-- Reiniciar el progreso al llegar al límite
+		if self.clicks >= self.clicks_to_complete then
+			self.clicks = 0 -- Reiniciar clics
+			update_progress(self) -- Reiniciar el pie
+		end
 	end
 end

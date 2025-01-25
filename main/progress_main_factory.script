@@ -1,0 +1,22 @@
+function init(self)
+	-- URL del Collection Proxy
+	self.collection_proxy_url = msg.url("/progressAcuario#progress_factory")
+
+	-- Cargar la colección del GUI
+	msg.post(self.collection_proxy_url, "load")
+end
+
+function on_message(self, message_id, message, sender)
+	-- Verificar si la colección se ha cargado
+	if message_id == hash("proxy_loaded") then
+		-- Activar la colección una vez cargada
+		msg.post(sender, "enable")
+		print("GUI Collection cargada y habilitada.")
+	elseif message_id == hash("proxy_unloaded") then
+		print("GUI Collection descargada.")
+	end
+end
+
+function on_input(self, action_id, action)
+	-- Manejar la entrada, si es necesario
+end
