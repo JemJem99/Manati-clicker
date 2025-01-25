@@ -68,27 +68,6 @@ embedded_instances {
   "    y: 2.767481\n"
   "  }\n"
   "}\n"
-  "embedded_components {\n"
-  "  id: \"label1\"\n"
-  "  type: \"label\"\n"
-  "  data: \"size {\\n"
-  "  x: 128.0\\n"
-  "  y: 32.0\\n"
-  "}\\n"
-  "text: \\\"Label\\\"\\n"
-  "font: \\\"/builtins/fonts/default.font\\\"\\n"
-  "material: \\\"/builtins/fonts/label-df.material\\\"\\n"
-  "\"\n"
-  "  position {\n"
-  "    x: 483.0\n"
-  "    y: 31.0\n"
-  "  }\n"
-  "  scale {\n"
-  "    x: 1.42\n"
-  "    y: 1.42\n"
-  "    z: 1.42\n"
-  "  }\n"
-  "}\n"
   ""
   position {
     x: 116.0
@@ -137,5 +116,19 @@ embedded_instances {
     x: 1.58
     y: 1.58
     z: 1.58
+  }
+}
+embedded_instances {
+  id: "progressAcuario"
+  data: "embedded_components {\n"
+  "  id: \"progress_factory\"\n"
+  "  type: \"collectionproxy\"\n"
+  "  data: \"collection: \\\"/main/gui_collection.collection\\\"\\n"
+  "\"\n"
+  "}\n"
+  ""
+  position {
+    x: 612.0
+    y: 417.0
   }
 }

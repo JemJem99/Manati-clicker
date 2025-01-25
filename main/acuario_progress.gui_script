@@ -1,41 +1,36 @@
 function init(self)
-	-- Add initialization code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
+	-- Inicializar variables
+	self.clicks = 0             -- Número de clics actuales
+	self.clicks_to_spawn = 10   -- Clics necesarios para generar un nuevo objeto
+	self.pie_node = gui.get_node("pie") -- Nodo del pie en la GUI
 end
 
-function final(self)
-	-- Add finalization code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
+function update_progress(self)
+	-- Calcular porcentaje de progreso
+	local progress = self.clicks / self.clicks_to_spawn
+	if progress > 1 then
+		progress = 1 -- Limitar el progreso al 100%
+	end
+
+	-- Ajustar el tamaño del nodo pie basado en el progreso
+	local size = gui.get_size(self.pie_node)
+	size.x = 100 * progress -- Ajustar el ancho según el porcentaje (100 es el tamaño base)
+	gui.set_size(self.pie_node, size)
+
+	-- Opcional: Cambiar color según el progreso
+	local color = vmath.vector4(1 - progress, progress, 0, 1) -- De rojo a verde
+	gui.set_color(self.pie_node, color)
 end
 
-function update(self, dt)
-	-- Add update code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
+function increment_clicks(self)
+	-- Incrementar el contador de clics
+	self.clicks = self.clicks + 1
 
-function on_message(self, message_id, message, sender)
-	-- Add message-handling code here
-	-- Learn more: https://defold.com/manuals/message-passing/
-	-- Remove this function if not needed
-end
+	-- Actualizar el nodo pie
+	update_progress(self)
 
-function on_input(self, action_id, action)
-	-- Add input-handling code here. The game object this script is attached to
-	-- must have acquired input focus:
-	--
-	--    msg.post(".", "acquire_input_focus")
-	--
-	-- All mapped input bindings will be received. Mouse and touch input will
-	-- be received regardless of where on the screen it happened.
-	-- Learn more: https://defold.com/manuals/input/
-	-- Remove this function if not needed
-end
-
-function on_reload(self)
-	-- Add reload-handling code here
-	-- Learn more: https://defold.com/manuals/hot-reload/
-	-- Remove this function if not needed
+	-- Reiniciar clics si se alcanza el objetivo
+	if self.clicks >= self.clicks_to_spawn then
+		self.clicks = 0 -- Reiniciar el contador
+	end
 end
