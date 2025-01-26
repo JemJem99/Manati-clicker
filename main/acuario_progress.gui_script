@@ -4,24 +4,24 @@ function init(self)
 	self.clicks_to_complete = 10 -- Número de clics necesarios para llenar el pie
 	self.pie_node = gui.get_node("pie") -- Nodo del pie en la GUI
 
-	-- increase perimeter vertices
+	-- Asegurar que el nodo del pie esté configurado correctamente
 	local vertices = gui.get_perimeter_vertices(self.pie_node)
 	gui.set_perimeter_vertices(self.pie_node, vertices + 1)
 end
 
 -- Función para actualizar el progreso del pie
 function update_progress(self)
+	-- Calcular el progreso en base a los clics realizados
+	local progress = self.clicks / self.clicks_to_complete
 
+	-- Asegurarse de que el progreso no exceda el 100%
 	if progress > 1 then
-		progress = 1 -- Asegurar que no supere el 100%
+		progress = 1
 	end
-	
+
 	-- Ajustar el segmento del pie basado en el progreso
 	gui.set_fill_angle(self.pie_node, progress * 360)
-
 end
-
-
 
 -- Incrementar los clics y actualizar el pie
 function on_message(self, message_id, message, sender)

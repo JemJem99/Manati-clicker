@@ -59,7 +59,7 @@ function on_input(self, action_id, action)
 
 			--actualizar gui progress
 			if self.progress_acuario_url then
-				msg.post(self.progress_acuario_url .. "#progress_gui", "increment_clicks")
+				msg.post(self.progress_acuario_url .. "/progressAcuario#progress_factory", "increment_clicks")
 				
 			end
 			print("Progress Acuario URL:", self.progress_acuario_url)
