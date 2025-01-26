@@ -2,7 +2,7 @@ function init(self)
 	-- Inicia un temporizador que se repite cada 3 segundos
 	self.timer = timer.delay(3, true, function()
 		-- Envía un mensaje al puntaje principal para incrementar los puntos
-		msg.post("main:/manati#script", "increment_points", { points = 1 })
+		msg.post("/manati#manati", "increment_points", { points = 1 })
 		
 	end)
 end
