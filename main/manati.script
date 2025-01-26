@@ -17,7 +17,8 @@ function init(self)
 
 	self.sound_url = msg.url("#click_sound")
 	self.wow_sound_url = msg.url("#wow_sound")
-	
+	self.canticos_sound_url = msg.url("#canticos_sound")
+	sound.play(self.canticos_sound_url, { looping = true })
 end
 
 

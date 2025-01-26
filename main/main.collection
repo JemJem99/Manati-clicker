@@ -36,6 +36,12 @@ embedded_instances {
   "looping: 1\\n"
   "\"\n"
   "}\n"
+  "embedded_components {\n"
+  "  id: \"canticos_sound\"\n"
+  "  type: \"sound\"\n"
+  "  data: \"sound: \\\"/main/canticos_sound.wav\\\"\\n"
+  "\"\n"
+  "}\n"
   ""
   position {
     x: 481.0
