@@ -1,14 +1,12 @@
 function init(self)
-	-- Inicia un temporizador que se repite cada 3 segundos
 	self.timer = timer.delay(3, true, function()
-		-- Envía un mensaje al puntaje principal para incrementar los puntos
 		msg.post("/manati#manati", "increment_points", { points = 1 })
 		
 	end)
 end
 
 function final(self)
-	-- Cancelar el temporizador cuando se elimine el GameObject
+
 	if self.timer then
 		timer.cancel(self.timer)
 		self.timer = nil

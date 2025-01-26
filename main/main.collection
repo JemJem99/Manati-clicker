@@ -143,21 +143,3 @@ embedded_instances {
     z: 1.58
   }
 }
-embedded_instances {
-  id: "progressAcuario"
-  data: "components {\n"
-  "  id: \"progress_main_factory\"\n"
-  "  component: \"/main/progress_main_factory.script\"\n"
-  "}\n"
-  "embedded_components {\n"
-  "  id: \"progress_factory\"\n"
-  "  type: \"collectionproxy\"\n"
-  "  data: \"collection: \\\"/main/gui_collection.collection\\\"\\n"
-  "\"\n"
-  "}\n"
-  ""
-  position {
-    x: 623.0
-    y: 412.0
-  }
-}
