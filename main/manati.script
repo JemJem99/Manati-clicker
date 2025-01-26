@@ -1,5 +1,4 @@
 function init(self)
-	-- Inicializar variables
 	msg.post(".", "acquire_input_focus")
 	self.score = 0
 	self.progress = 0
@@ -9,7 +8,6 @@ function init(self)
 	self.scale_duration = 0.2
 	self.timer = 0
 
-	-- Factory para objetos y efectos
 	self.factory_url = msg.url("/FactoryGameObject#factory")
 	self.plus_one_factory_url = msg.url("/PlusOneFcatoryGameObject#PlusOneFactory")
 	self.spawn_x = 50
@@ -21,13 +19,7 @@ function init(self)
 	sound.play(self.canticos_sound_url, { looping = true })
 end
 
-
-function final(self)
-	-- Finalización del script si es necesario
-end
-
 function update(self, dt)
-	-- Controla la animación de escalado
 	if self.scaling then
 		self.timer = self.timer - dt
 		if self.timer <= 0 then
@@ -37,15 +29,9 @@ function update(self, dt)
 	end
 end
 
-function fixed_update(self, dt)
-	-- Agregar lógica de actualización fija si es necesario
-end
-
 function on_message(self, message_id, message, sender)
 	if message_id == hash("increment_points") then
 		self.score = self.score + message.points
-		print("Puntaje actualizado:", self.score)
-		-- Opcional: Actualizar visualmente el puntaje
 		msg.post("/score#text", "points_updated", { points = self.score })
 	end
 end
