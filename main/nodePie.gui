@@ -1,5 +1,9 @@
 script: "/main/acuario_progress.gui_script"
 nodes {
+  position {
+    x: 384.0
+    y: 500.0
+  }
   scale {
     x: 0.498644
   }
@@ -10,7 +14,7 @@ nodes {
   type: TYPE_PIE
   id: "pie"
   inherit_alpha: true
-  innerRadius: 50.0
+  innerRadius: 60.0
   size_mode: SIZE_MODE_AUTO
 }
 material: "/builtins/materials/gui.material"

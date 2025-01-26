@@ -1,7 +1,26 @@
 name: "main"
+instances {
+  id: "gorro"
+  prototype: "/main/gorro.go"
+  position {
+    x: 132.0
+    y: 225.0
+    z: 1.0
+  }
+  rotation {
+    z: -0.046941385
+    w: 0.9988977
+  }
+  scale3 {
+    x: 0.232
+    y: 0.232
+    z: 0.232
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "manati"
+  children: "gorro"
   data: "components {\n"
   "  id: \"manati\"\n"
   "  component: \"/main/manati.script\"\n"
